@@ -2,7 +2,7 @@ import { ReactNode, createContext, useContext, useState } from 'react';
 
 const BASE_URL = 'https://cross-platform.rp.devfactory.com';
 
-type Question = {
+export type Question = {
     type: string;
     id: number;
     playlist: string;
@@ -19,7 +19,7 @@ type Question = {
     };
 };
 
-type Answer = {
+export type Answer = {
     id: number;
     correct_options: {
         id: string;
@@ -27,12 +27,12 @@ type Answer = {
     }[];
 };
 
-type QA = {
+export type QA = {
     question: Question;
     answer: Answer;
 };
 
-type ContextType = {
+export type ContextType = {
     data: QA[];
     getData: () => void;
     isLoading: boolean;
