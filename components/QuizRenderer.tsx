@@ -1,22 +1,28 @@
-import { Text, useWindowDimensions } from 'react-native';
+import { ImageBackground, Text, useWindowDimensions } from 'react-native';
 import styled from 'styled-components/native';
 import React from 'react';
 import { QA } from '../Provider/AppProvider';
 
 type Props = {
-    data: QA
-}
+    data: QA;
+};
 
-const Container = styled.View<{height: number}>`
+const Container = styled.View<{ height: number }>`
     flex: 1;
-    height: ${props => props.height + 'px'};
+    height: ${(props) => props.height + 'px'};
+`;
+
+const BackgroundImage = styled(ImageBackground)`
+    flex: 1;
 `
 
-const QuizRenderer = ({data}: Props) => {
+const QuizRenderer = ({ data }: Props) => {
     const { height } = useWindowDimensions();
     return (
         <Container height={height}>
-            <Text>{data.question.question}</Text>
+            <BackgroundImage source={{ uri: data.question.image }} resizeMode='cover'>
+                <Text>{data.question.question}</Text>
+            </BackgroundImage>
         </Container>
     );
 };

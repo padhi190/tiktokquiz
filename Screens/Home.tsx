@@ -1,4 +1,4 @@
-import { View, Text, FlatList, SafeAreaView } from 'react-native';
+import { View, Text, FlatList, SafeAreaView, Dimensions } from 'react-native';
 import React, { useEffect } from 'react';
 import { useAppContext } from '../Provider/AppProvider';
 import QuizRenderer from '../components/QuizRenderer';
@@ -25,8 +25,9 @@ const Home = () => {
                 renderItem={({ item }) => <QuizRenderer data={item} />}
                 onEndReached={getData}
                 onEndReachedThreshold={0.8}
-                pagingEnabled
-                ItemSeparatorComponent={() => <Separator />}
+                snapToAlignment='start'
+                decelerationRate={'fast'}
+                snapToInterval={Dimensions.get('window').height}
             />
         </HomeContainer>
     );
