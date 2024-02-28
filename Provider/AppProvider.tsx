@@ -34,7 +34,7 @@ export type QA = {
 
 export type ContextType = {
     data: QA[];
-    getData: () => void;
+    getNData: (number?:number) => void;
     isLoading: boolean;
     isError: boolean;
     minute: number;
@@ -56,15 +56,21 @@ const AppProvider = ({ children }: { children: ReactNode }) => {
         return () => clearInterval(timerId);
     }, []);
 
+    useEffect(() => {
+        getNData();
+    },[])
+
     const getData = async () => {
         setIsLoading(true);
         setIsError(false);
         try {
+            console.log('calling api...')
             const response = await fetch(`${BASE_URL}/for_you`);
             if (!response.ok) {
                 throw new Error('Failed to fetch question');
             }
             const question = (await response.json()) as Question;
+            console.log(`question: ${question.question}`)
             const answerResponse = await fetch(`${BASE_URL}/reveal?id=${question.id}`);
             if (!response.ok) {
                 throw new Error('Failed to fetch answer');
@@ -78,7 +84,13 @@ const AppProvider = ({ children }: { children: ReactNode }) => {
         }
     };
 
-    return <AppContext.Provider value={{ data, getData, isLoading, isError, minute }}>{children}</AppContext.Provider>;
+    const getNData = (numberOfData = 3 ) => {
+        while (numberOfData > 0) {
+            (async () => await getData())();
+            numberOfData--;
+        }
+    }
+    return <AppContext.Provider value={{ data, getNData, isLoading, isError, minute }}>{children}</AppContext.Provider>;
 };
 
 export default AppProvider;

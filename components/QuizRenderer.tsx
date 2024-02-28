@@ -73,4 +73,4 @@ const QuizRenderer = ({ data }: Props) => {
     );
 };
 
-export default QuizRenderer;
+export default React.memo(QuizRenderer);
