@@ -1,11 +1,8 @@
-import { ImageBackground, SafeAreaView, Text, useWindowDimensions } from 'react-native';
+import { ImageBackground, useWindowDimensions } from 'react-native';
 import Constants from 'expo-constants';
 import styled from 'styled-components/native';
 import React from 'react';
 import { QA } from '../Provider/AppProvider';
-import Timer from './Timer';
-import ForYou from './ForYou';
-import Search from './Search';
 import Question from './Question';
 import Options from './Options';
 import Playlist from './Playlist';
@@ -31,20 +28,16 @@ const SafeArea = styled.View`
     flex: 1;
 `;
 
-const TopBarContainer = styled.View`
-    flex-direction: row;
-    justify-content: center;
-    margin-bottom: 10px;
-`;
-
 const MainAreaContainer = styled.View`
     flex: 1;
+    margin-top: 50px;
     justify-content: space-between;
 `;
 
 const OptionsIconsContainer = styled.View`
     flex-direction: row;
-`
+    gap: 12px;
+`;
 
 const QuizRenderer = ({ data }: Props) => {
     const { height } = useWindowDimensions();
@@ -53,11 +46,6 @@ const QuizRenderer = ({ data }: Props) => {
         <Container height={height}>
             <BackgroundImage source={{ uri: data.question.image }} resizeMode="cover">
                 <SafeArea>
-                    <TopBarContainer>
-                        <Timer />
-                        <ForYou />
-                        <Search />
-                    </TopBarContainer>
                     <MainAreaContainer>
                         <Question question={data.question} />
                         <OptionsIconsContainer>
@@ -67,7 +55,6 @@ const QuizRenderer = ({ data }: Props) => {
                     </MainAreaContainer>
                 </SafeArea>
                 <Playlist playlist={data.question.playlist} />
-
             </BackgroundImage>
         </Container>
     );

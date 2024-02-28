@@ -34,10 +34,10 @@ export type QA = {
 
 export type ContextType = {
     data: QA[];
-    getNData: (number?:number) => void;
+    getNData: (number?: number) => void;
     isLoading: boolean;
     isError: boolean;
-    minute: number;
+    timeStarted: Date;
 };
 
 const AppContext = createContext<ContextType | null>(null);
@@ -47,30 +47,21 @@ const AppProvider = ({ children }: { children: ReactNode }) => {
     const [isLoading, setIsLoading] = useState(false);
     const [isError, setIsError] = useState(false);
 
-    const [minute, setMinute] = useState(0);
-    useEffect(() => {
-        const timerId = setInterval(() => {
-            setMinute(min => min + 1);
-        }, 1000 * 60);
-
-        return () => clearInterval(timerId);
-    }, []);
+    const timeStarted = new Date();
 
     useEffect(() => {
         getNData();
-    },[])
+    }, []);
 
     const getData = async () => {
         setIsLoading(true);
         setIsError(false);
         try {
-            console.log('calling api...')
             const response = await fetch(`${BASE_URL}/for_you`);
             if (!response.ok) {
                 throw new Error('Failed to fetch question');
             }
             const question = (await response.json()) as Question;
-            console.log(`question: ${question.question}`)
             const answerResponse = await fetch(`${BASE_URL}/reveal?id=${question.id}`);
             if (!response.ok) {
                 throw new Error('Failed to fetch answer');
@@ -84,13 +75,17 @@ const AppProvider = ({ children }: { children: ReactNode }) => {
         }
     };
 
-    const getNData = (numberOfData = 3 ) => {
+    const getNData = (numberOfData = 3) => {
         while (numberOfData > 0) {
             (async () => await getData())();
             numberOfData--;
         }
-    }
-    return <AppContext.Provider value={{ data, getNData, isLoading, isError, minute }}>{children}</AppContext.Provider>;
+    };
+    return (
+        <AppContext.Provider value={{ data, getNData, isLoading, isError, timeStarted }}>
+            {children}
+        </AppContext.Provider>
+    );
 };
 
 export default AppProvider;

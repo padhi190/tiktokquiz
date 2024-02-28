@@ -12,14 +12,29 @@ const Container = styled.View`
 `;
 const StyledText = styled.Text`
     color: white;
-    font-size: 14px;
+    font-size: 16px;
 `;
 
+const ONE_MINUTE = 1000 * 60;
+
 const Timer = () => {
-    const { minute } = useAppContext();
+    const [minute, setMinute] = useState<number>(0);
+    const { timeStarted } = useAppContext();
+
+    useEffect(() => {
+        const timer = setInterval(() => {
+            const endTime = new Date().getTime();
+            let timeDiff = endTime - timeStarted.getTime();
+            timeDiff = Math.floor(timeDiff / ONE_MINUTE);
+            setMinute(timeDiff);
+        }, ONE_MINUTE);
+
+        return () => clearInterval(timer);
+    }, []);
+
     return (
         <Container>
-            <Ionicons name="stopwatch" color={'white'} size={20} />
+            <Ionicons name="stopwatch" color={'white'} size={25} />
             <StyledText>{minute}m</StyledText>
         </Container>
     );

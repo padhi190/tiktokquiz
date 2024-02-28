@@ -4,7 +4,7 @@ import styled from 'styled-components/native';
 
 const OuterContainer = styled.View`
     justify-content: flex-end;
-    gap: 10px
+    gap: 10px;
 `;
 
 const Container = styled.View`
@@ -20,7 +20,7 @@ const ICON_SIZE = 30;
 const InteractiveIcons = () => {
     return (
         <OuterContainer>
-            <Icons name='add-circle' size={ICON_SIZE * 1.3} color={'white'} />
+            <Icons name="add-circle" size={ICON_SIZE * 1.3} color={'white'} />
             <Icon iconName="heart" text="87" />
             <Icon iconName="chatbubble-ellipses" text="2" />
             <Icon iconName="bookmarks" text="203" />

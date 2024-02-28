@@ -7,6 +7,7 @@ import Discover from '../Screens/Discover';
 import Activity from '../Screens/Activity';
 import Bookmarks from '../Screens/Bookmarks';
 import Profile from '../Screens/Profile';
+import TopBar from '../components/TopBar';
 
 export type TabPages = {
     home: undefined;
@@ -32,7 +33,8 @@ const RootNavigation = () => {
                     options={{
                         title: 'Home',
                         tabBarIcon: ({ color, size }) => <Ionicons name="home" color={color} size={size} />,
-                        headerShown: false,
+                        headerTransparent: true,
+                        header: () => <TopBar />,
                     }}
                 />
                 <Tabs.Screen

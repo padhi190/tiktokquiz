@@ -1,4 +1,4 @@
-import { View, Text, TouchableOpacity, Touchable, TouchableHighlight } from 'react-native';
+import { TouchableOpacity } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 import React, { useState } from 'react';
 import { Answer, Question } from '../Provider/AppProvider';
@@ -28,6 +28,7 @@ const OptionButton = styled(TouchableOpacity)<{ showThumbUp?: boolean; showThumb
     flex-direction: row;
     justify-content: space-between;
     align-items: center;
+    min-height: 55px;
 `;
 
 const TextButton = styled.Text`
