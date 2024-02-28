@@ -63,7 +63,7 @@ const AppProvider = ({ children }: { children: ReactNode }) => {
             }
             const question = (await response.json()) as Question;
             const answerResponse = await fetch(`${BASE_URL}/reveal?id=${question.id}`);
-            if (!response.ok) {
+            if (!answerResponse.ok) {
                 throw new Error('Failed to fetch answer');
             }
             const answer = (await answerResponse.json()) as Answer;
