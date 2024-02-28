@@ -80,6 +80,13 @@ const AppProvider = ({ children }: { children: ReactNode }) => {
             (async () => await getData())();
             numberOfData--;
         }
+
+        /* Keep the list small, remove old data if it's more than 10 */
+        if (data.length > 10) {
+            const newData = [...data];
+            newData.splice(0, 5);
+            setData(newData);
+        }
     };
     return (
         <AppContext.Provider value={{ data, getNData, isLoading, isError, timeStarted }}>
