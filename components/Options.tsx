@@ -1,21 +1,40 @@
-import { View, Text } from 'react-native';
-import React from 'react';
+import { View, Text, TouchableOpacity, Touchable, TouchableHighlight } from 'react-native';
+import { Ionicons } from '@expo/vector-icons';
+import React, { useState } from 'react';
 import { Answer, Question } from '../Provider/AppProvider';
 import styled from 'styled-components/native';
 
 const Container = styled.View`
     flex: 1;
-    gap: 4px;
+    gap: 12px;
+    justify-content: flex-end;
 `;
 
 const Description = styled.View`
     margin: 10px 0;
-`
+`;
 
 const DescriptionText = styled.Text`
     color: white;
     font-size: 14px;
-`
+`;
+
+const OptionButton = styled(TouchableOpacity)<{ showThumbUp?: boolean; showThumbDown?: boolean }>`
+    padding: 10px;
+    background-color: rgba(170, 170, 170, 0.9);
+    ${(props) => props.showThumbUp && 'background-color: rgb(53, 159, 129);'}
+    ${(props) => props.showThumbDown && 'background-color: rgb(178, 60, 60);'}
+    border-radius: 10px;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+`;
+
+const TextButton = styled.Text`
+    color: white;
+    font-size: 16px;
+    max-width: 80%;
+`;
 
 type Props = {
     question: Question;
@@ -23,17 +42,42 @@ type Props = {
 };
 
 const Options = ({ question, answer }: Props) => {
+    const [userAnswer, setUserAnswer] = useState<string | null>(null);
+    const isCorrect = userAnswer === answer.correct_options[0].id;
+
+    const userHasAnswered = userAnswer !== null;
+
+    const handleSelect = (id: string) => {
+        if (userHasAnswered) return;
+        setUserAnswer(id);
+    };
     return (
         <Container>
-            {question.options.map((option) => (
-                <Text key={option.id}>{option.answer}</Text>
-            ))}
+            {question.options.map((option) => {
+                const selectedByUser = userAnswer === option.id;
+                const isTheRightOption = answer.correct_options[0].id === option.id;
+
+                const showThumbUp = isTheRightOption && userHasAnswered;
+                const showThumbDown = selectedByUser && !isCorrect;
+                return (
+                    <OptionButton
+                        key={option.id}
+                        onPress={() => handleSelect(option.id)}
+                        showThumbUp={showThumbUp}
+                        showThumbDown={showThumbDown}
+                        disabled={userHasAnswered}>
+                        <TextButton>{option.answer}</TextButton>
+                        {showThumbUp && <Ionicons name="thumbs-up" size={20} color={'white'} />}
+                        {showThumbDown && <Ionicons name="thumbs-down" size={20} color={'white'} />}
+                    </OptionButton>
+                );
+            })}
             <Description>
-                <DescriptionText>{question.user.name}</DescriptionText> 
-                <DescriptionText>{question.description}</DescriptionText> 
+                <DescriptionText>{question.user.name}</DescriptionText>
+                <DescriptionText>{question.description}</DescriptionText>
             </Description>
         </Container>
     );
 };
 
-export default Options;
+export default React.memo(Options);

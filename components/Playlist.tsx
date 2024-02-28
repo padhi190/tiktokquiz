@@ -7,7 +7,7 @@ const Container = styled.View`
     flex-direction: row;
     justify-content: space-between;
     align-items: center;
-    background-color: rgba(0, 0, 0, 0.85);
+    background-color: black; 
 `;
 
 const PlaylistContainer = styled.View`
