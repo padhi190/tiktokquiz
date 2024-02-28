@@ -7,10 +7,6 @@ import styled from 'styled-components/native';
 const HomeContainer = styled.View`
     flex: 1;
 `
-const Separator = styled.View`
-    height: 10px;
-    background-color: white;
-`
 const Home = () => {
     const { data, getData } = useAppContext();
 
@@ -24,7 +20,7 @@ const Home = () => {
                 keyExtractor={() => Math.random().toString()}
                 renderItem={({ item }) => <QuizRenderer data={item} />}
                 onEndReached={getData}
-                onEndReachedThreshold={0.8}
+                onEndReachedThreshold={0.5}
                 snapToAlignment='start'
                 decelerationRate={'fast'}
                 snapToInterval={Dimensions.get('window').height}

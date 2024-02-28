@@ -60,7 +60,6 @@ const AppProvider = ({ children }: { children: ReactNode }) => {
                 throw new Error('Failed to fetch answer');
             }
             const answer = (await answerResponse.json()) as Answer;
-            console.log('setting data...');
             setData((prevData) => [...prevData, { question, answer }]);
         } catch (error) {
             setIsError(false);
