@@ -50,7 +50,7 @@ const QuizRenderer = ({ data }: Props) => {
                         <Question question={data.question} />
                         <OptionsIconsContainer>
                             <Options question={data.question} answer={data.answer} />
-                            <InteractiveIcons />
+                            <InteractiveIcons avatar={data.question.user.avatar} />
                         </OptionsIconsContainer>
                     </MainAreaContainer>
                 </SafeArea>
