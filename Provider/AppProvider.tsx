@@ -1,4 +1,4 @@
-import { ReactNode, createContext, useContext, useState } from 'react';
+import { ReactNode, createContext, useContext, useEffect, useState } from 'react';
 
 const BASE_URL = 'https://cross-platform.rp.devfactory.com';
 
@@ -37,6 +37,7 @@ export type ContextType = {
     getData: () => void;
     isLoading: boolean;
     isError: boolean;
+    minute: number;
 };
 
 const AppContext = createContext<ContextType | null>(null);
@@ -45,6 +46,15 @@ const AppProvider = ({ children }: { children: ReactNode }) => {
     const [data, setData] = useState<QA[]>([]);
     const [isLoading, setIsLoading] = useState(false);
     const [isError, setIsError] = useState(false);
+
+    const [minute, setMinute] = useState(0);
+    useEffect(() => {
+        const timerId = setInterval(() => {
+            setMinute(min => min + 1);
+        }, 1000 * 60);
+
+        return () => clearInterval(timerId);
+    }, []);
 
     const getData = async () => {
         setIsLoading(true);
@@ -68,7 +78,7 @@ const AppProvider = ({ children }: { children: ReactNode }) => {
         }
     };
 
-    return <AppContext.Provider value={{ data, getData, isLoading, isError }}>{children}</AppContext.Provider>;
+    return <AppContext.Provider value={{ data, getData, isLoading, isError, minute }}>{children}</AppContext.Provider>;
 };
 
 export default AppProvider;
