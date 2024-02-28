@@ -1,10 +1,16 @@
 import { View, Text } from 'react-native';
-import React from 'react';
+import React, { useEffect } from 'react';
+import { useAppContext } from '../Provider/AppProvider';
 
 const Home = () => {
+    const { data, getData } = useAppContext();
+
+    useEffect(() => {
+        getData();
+    },[])
     return (
         <View>
-            <Text>Home</Text>
+            <Text>{JSON.stringify(data,null,2)}</Text>
         </View>
     );
 };

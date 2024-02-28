@@ -1,0 +1,82 @@
+import { ReactNode, createContext, useContext, useState } from 'react';
+
+const BASE_URL = 'https://cross-platform.rp.devfactory.com';
+
+type Question = {
+    type: string;
+    id: number;
+    playlist: string;
+    description: string;
+    image: string;
+    question: string;
+    options: {
+        id: string;
+        answer: string;
+    }[];
+    user: {
+        name: string;
+        avatar: string;
+    };
+};
+
+type Answer = {
+    id: number;
+    correct_options: {
+        id: string;
+        answer: string;
+    }[];
+};
+
+type QA = {
+    question: Question;
+    answer: Answer;
+};
+
+type ContextType = {
+    data: QA[];
+    getData: () => void;
+    isLoading: boolean;
+    isError: boolean;
+};
+
+const AppContext = createContext<ContextType | null>(null);
+
+const AppProvider = ({ children }: { children: ReactNode }) => {
+    const [data, setData] = useState<QA[]>([]);
+    const [isLoading, setIsLoading] = useState(false);
+    const [isError, setIsError] = useState(false);
+
+    const getData = async () => {
+        setIsLoading(true);
+        setIsError(false);
+        try {
+            const response = await fetch(`${BASE_URL}/for_you`);
+            if (!response.ok) {
+                throw new Error('Failed to fetch question');
+            }
+            const question = (await response.json()) as Question;
+            const answerResponse = await fetch(`${BASE_URL}/reveal?id=${question.id}`);
+            if (!response.ok) {
+                throw new Error('Failed to fetch answer');
+            }
+            const answer = (await answerResponse.json()) as Answer;
+            console.log('setting data...');
+            setData((prevData) => [...prevData, { question, answer }]);
+        } catch (error) {
+            setIsError(false);
+        } finally {
+            setIsLoading(false);
+        }
+    };
+
+    return <AppContext.Provider value={{ data, getData, isLoading, isError }}>{children}</AppContext.Provider>;
+};
+
+export default AppProvider;
+
+export const useAppContext = () => {
+    const value = useContext(AppContext);
+    if (!value) throw new Error('App context can only be called from within AppContext Provider');
+
+    return value;
+};
