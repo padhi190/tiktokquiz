@@ -3,7 +3,7 @@ import styled from 'styled-components/native';
 
 const Container = styled.View`
     margin-top: 50px;
-    background-color: rgba(0, 0, 0, 0.8);
+    background-color: rgba(0, 0, 0, 0.9);
     padding: 10px;
     border-radius: 10px;
 `;

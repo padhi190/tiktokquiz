@@ -15,10 +15,12 @@ type Props = {
 const Container = styled.View<{ height: number }>`
     flex: 1;
     height: ${(props) => props.height - Constants.statusBarHeight - 20 + 'px'};
+    background-color: black;
 `;
 
 const BackgroundImage = styled(ImageBackground)`
     flex: 1;
+    opacity: 0.7;
 `;
 
 const SafeArea = styled.View`
