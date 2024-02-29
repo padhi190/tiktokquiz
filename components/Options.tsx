@@ -20,7 +20,7 @@ const DescriptionText = styled.Text`
 
 const OptionButton = styled(TouchableOpacity)<{ showCorrectStyle?: boolean; showIncorrectStyle?: boolean }>`
     padding: 10px;
-    background-color: rgba(170, 170, 170, 0.9);
+    background-color: rgba(130, 130, 130, 0.9);
     ${(props) => props.showCorrectStyle && 'background-color: rgb(53, 159, 129);'}
     ${(props) => props.showIncorrectStyle && 'background-color: rgb(178, 60, 60);'}
     border-radius: 10px;
