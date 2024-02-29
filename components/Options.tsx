@@ -37,6 +37,17 @@ const TextButton = styled.Text`
     max-width: 80%;
 `;
 
+const ThumbImage = styled.Image`
+    width: 50px;
+    height: 50px;
+`
+const ThumbUpImage = styled(ThumbImage)`
+    transform: scaleX(-1);
+`
+const ThumbDownImage = styled(ThumbImage)`
+    transform: rotate(180deg);
+`
+
 type Props = {
     question: Question;
     answer: Answer;
@@ -68,8 +79,8 @@ const Options = ({ question, answer }: Props) => {
                         showThumbDown={showThumbDown}
                         disabled={userHasAnswered}>
                         <TextButton>{option.answer}</TextButton>
-                        {showThumbUp && <Ionicons name="thumbs-up" size={20} color={'white'} />}
-                        {showThumbDown && <Ionicons name="thumbs-down" size={20} color={'white'} />}
+                        {showThumbUp && <ThumbUpImage source={require('../assets/correct.gif')} />}
+                        {showThumbDown && <ThumbDownImage source={require('../assets/wrong.gif')} />}
                     </OptionButton>
                 );
             })}
