@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
-import { Ionicons } from '@expo/vector-icons';
 import styled from 'styled-components/native';
 import { useAppContext } from '../Provider/AppProvider';
+import Stopwatch from '../assets/activity.svg';
 
 const Container = styled.View`
     flex: 1;
@@ -11,7 +11,7 @@ const Container = styled.View`
     margin: 0;
 `;
 const StyledText = styled.Text`
-    color: white;
+    color: #ccc;
     font-size: 16px;
 `;
 
@@ -34,7 +34,7 @@ const Timer = () => {
 
     return (
         <Container>
-            <Ionicons name="stopwatch" color={'white'} size={25} />
+            <Stopwatch width={25} />
             <StyledText>{minute}m</StyledText>
         </Container>
     );

@@ -1,6 +1,6 @@
-import { Ionicons } from '@expo/vector-icons';
 import React from 'react';
 import styled from 'styled-components/native';
+import SearchIcon from '../assets/search.svg';
 
 const Container = styled.View`
     flex: 1;
@@ -11,7 +11,7 @@ const Container = styled.View`
 const Search = () => {
     return (
         <Container>
-            <Ionicons color={'white'} size={25} name="search" />
+            <SearchIcon width={25} />
         </Container>
     );
 };
