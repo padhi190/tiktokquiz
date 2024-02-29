@@ -8,6 +8,10 @@ import Activity from '../Screens/Activity';
 import Bookmarks from '../Screens/Bookmarks';
 import Profile from '../Screens/Profile';
 import TopBar from '../components/TopBar';
+import HomeIcon from '../assets/home.svg';
+import DiscoverIcons from '../assets/discover.svg';
+import ActivityIcon from '../assets/activity.svg';
+import ProfileIcon from '../assets/profile.svg';
 
 export type TabPages = {
     home: undefined;
@@ -32,7 +36,7 @@ const RootNavigation = () => {
                     component={Home}
                     options={{
                         title: 'Home',
-                        tabBarIcon: ({ color, size }) => <Ionicons name="home" color={color} size={size} />,
+                        tabBarIcon: ({ color, size }) => <HomeIcon height={size} color={color} />,
                         headerTransparent: true,
                         header: () => <TopBar />,
                     }}
@@ -42,7 +46,7 @@ const RootNavigation = () => {
                     component={Discover}
                     options={{
                         title: 'Discover',
-                        tabBarIcon: ({ color, size }) => <Ionicons name="compass" color={color} size={size} />,
+                        tabBarIcon: ({ color, size }) => <DiscoverIcons height={size} color={color} />,
                     }}
                 />
                 <Tabs.Screen
@@ -50,7 +54,7 @@ const RootNavigation = () => {
                     component={Activity}
                     options={{
                         title: 'Activity',
-                        tabBarIcon: ({ color, size }) => <Ionicons name="stopwatch" color={color} size={size} />,
+                        tabBarIcon: ({ color, size }) => <ActivityIcon height={size} color={color} />,
                     }}
                 />
                 <Tabs.Screen
@@ -58,7 +62,7 @@ const RootNavigation = () => {
                     component={Bookmarks}
                     options={{
                         title: 'Bookmarks',
-                        tabBarIcon: ({ color, size }) => <Ionicons name="bookmark-sharp" color={color} size={size} />,
+                        tabBarIcon: ({ color, size }) => <Ionicons name="bookmark" size={size} color={color} />,
                     }}
                 />
                 <Tabs.Screen
@@ -66,7 +70,7 @@ const RootNavigation = () => {
                     component={Profile}
                     options={{
                         title: 'Profile',
-                        tabBarIcon: ({ color, size }) => <Ionicons name="person-circle" color={color} size={size} />,
+                        tabBarIcon: ({ color, size }) => <ProfileIcon height={size} color={color} />,
                     }}
                 />
             </Tabs.Navigator>

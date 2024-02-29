@@ -2,6 +2,7 @@ import React from 'react';
 import { MaterialIcons } from '@expo/vector-icons';
 import { QA } from '../Provider/AppProvider';
 import styled from 'styled-components/native';
+import PlaylistIcon from '../assets/playlist.svg';
 
 const Container = styled.View`
     flex-direction: row;
@@ -28,7 +29,7 @@ const Playlist = ({ playlist }: Props) => {
     return (
         <Container>
             <PlaylistContainer>
-                <MaterialIcons color={'white'} size={20} name="video-collection" />
+                <PlaylistIcon color={'white'} width={20} />
                 <StyledText>Playlist - {playlist}</StyledText>
             </PlaylistContainer>
             <MaterialIcons color={'white'} size={20} name="chevron-right" />
