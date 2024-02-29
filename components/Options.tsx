@@ -19,16 +19,16 @@ const DescriptionText = styled.Text`
     font-size: 14px;
 `;
 
-const OptionButton = styled(TouchableOpacity)<{ showThumbUp?: boolean; showThumbDown?: boolean }>`
+const OptionButton = styled(TouchableOpacity)<{ showCorrectStyle?: boolean; showIncorrectStyle?: boolean }>`
     padding: 10px;
     background-color: rgba(170, 170, 170, 0.9);
-    ${(props) => props.showThumbUp && 'background-color: rgb(53, 159, 129);'}
-    ${(props) => props.showThumbDown && 'background-color: rgb(178, 60, 60);'}
+    ${(props) => props.showCorrectStyle && 'background-color: rgb(53, 159, 129);'}
+    ${(props) => props.showIncorrectStyle && 'background-color: rgb(178, 60, 60);'}
     border-radius: 10px;
     flex-direction: row;
     justify-content: space-between;
     align-items: center;
-    min-height: 55px;
+    min-height: 70px;
 `;
 
 const TextButton = styled.Text`
@@ -69,14 +69,14 @@ const Options = ({ question, answer }: Props) => {
                 const selectedByUser = userAnswer === option.id;
                 const isTheRightOption = answer.correct_options[0].id === option.id;
 
-                const showThumbUp = isTheRightOption && userHasAnswered;
+                const showThumbUp = isTheRightOption && userHasAnswered && isCorrect;
                 const showThumbDown = selectedByUser && !isCorrect;
                 return (
                     <OptionButton
                         key={option.id}
                         onPress={() => handleSelect(option.id)}
-                        showThumbUp={showThumbUp}
-                        showThumbDown={showThumbDown}
+                        showCorrectStyle={isTheRightOption && userHasAnswered}
+                        showIncorrectStyle={showThumbDown}
                         disabled={userHasAnswered}>
                         <TextButton>{option.answer}</TextButton>
                         {showThumbUp && <ThumbUpImage source={require('../assets/correct.gif')} />}

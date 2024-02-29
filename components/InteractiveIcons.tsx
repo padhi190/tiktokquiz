@@ -6,6 +6,8 @@ import Comment from '../assets/comment.svg';
 import Bookmark from "../assets/bookmark.svg";
 import Share from "../assets/share.svg";
 
+const ICON_SIZE = 45;
+
 const OuterContainer = styled.View`
     justify-content: flex-end;
     gap: 10px;
@@ -16,9 +18,9 @@ const Container = styled.View`
 `;
 
 const AvatarContainer = styled.View`
-    width: 35px;
-    height: 35px;
-    border-radius: 35px;
+    width: ${ICON_SIZE + 'px'};
+    height: ${ICON_SIZE + 'px'};
+    border-radius: ${ICON_SIZE + 'px'};
     border: 1px solid white;
     overflow: hidden;
     justify-content: baseline;
@@ -27,8 +29,8 @@ const AvatarContainer = styled.View`
 `;
 
 const AvatarImage = styled(ImageBackground)`
-    width: 35px;
-    height: 35px;
+    width: ${ICON_SIZE + 'px'};
+    height: ${ICON_SIZE + 'px'};
 `;
 
 const StyledText = styled.Text`
@@ -36,7 +38,6 @@ const StyledText = styled.Text`
     font-size: 16px;
 `;
 
-const ICON_SIZE = 30;
 
 type Props = {
     avatar: string;
