@@ -1,7 +1,10 @@
-import { Ionicons as Icons } from '@expo/vector-icons';
 import React from 'react';
 import { ImageBackground } from 'react-native';
 import styled from 'styled-components/native';
+import Heart from '../assets/heart.svg';
+import Comment from '../assets/comment.svg';
+import Bookmark from "../assets/bookmark.svg";
+import Share from "../assets/share.svg";
 
 const OuterContainer = styled.View`
     justify-content: flex-end;
@@ -43,18 +46,18 @@ const InteractiveIcons = ({ avatar }: Props) => {
     return (
         <OuterContainer>
             <Avatar avatar={avatar} />
-            <Icon iconName="heart" text="87" />
-            <Icon iconName="chatbubble-ellipses" text="2" />
-            <Icon iconName="bookmarks" text="203" />
-            <Icon iconName="arrow-redo" text="17" />
+            <Icon icon={Heart} text="87" />
+            <Icon icon={Comment} text="2" />
+            <Icon icon={Bookmark} text="203" />
+            <Icon icon={Share} text="17" />
         </OuterContainer>
     );
 };
 
-const Icon = ({ iconName, text }: { iconName: keyof typeof Icons.glyphMap; text: string }) => {
+const Icon = ({ icon: Icon, text }: { icon: React.JSXElementConstructor<{height: number}>; text: string }) => {
     return (
         <Container>
-            <Icons name={iconName} size={ICON_SIZE} color={'white'} />
+            <Icon height={ICON_SIZE} />
             <StyledText>{text}</StyledText>
         </Container>
     );
