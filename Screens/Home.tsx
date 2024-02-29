@@ -1,4 +1,4 @@
-import { FlatList, Dimensions } from 'react-native';
+import { FlatList, Dimensions, ActivityIndicator } from 'react-native';
 import Constants from 'expo-constants';
 import React, { useMemo } from 'react';
 import { useAppContext } from '../Provider/AppProvider';
@@ -8,9 +8,21 @@ import styled from 'styled-components/native';
 const HomeContainer = styled.View`
     flex: 1;
 `;
+
+const LoadingContainer = styled.View`
+    flex: 1;
+    justify-content: center;
+    align-items: center;
+`
 const Home = () => {
-    const { data, getNData } = useAppContext();
+    const { data, getNData, isLoading } = useAppContext();
     const windowHeight = useMemo(() => Dimensions.get('window').height, []);
+
+    if (data.length == 0 && isLoading) return (
+        <LoadingContainer>
+            <ActivityIndicator size={'large'} />
+        </LoadingContainer>
+    )
 
     return (
         <HomeContainer>

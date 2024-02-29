@@ -12,9 +12,11 @@ type Props = {
     data: QA;
 };
 
+export const MARGIN = 20;
+
 const Container = styled.View<{ height: number }>`
     flex: 1;
-    height: ${(props) => props.height - Constants.statusBarHeight - 20 + 'px'};
+    height: ${(props) => props.height - Constants.statusBarHeight - MARGIN + 'px'};
     background-color: black;
 `;
 
@@ -24,7 +26,7 @@ const BackgroundImage = styled(ImageBackground)`
 `;
 
 const SafeArea = styled.View`
-    padding-top: ${Constants.statusBarHeight + 20 + 'px'};
+    padding-top: ${Constants.statusBarHeight + MARGIN + 'px'};
     padding-right: 10px;
     padding-left: 10px;
     flex: 1;
