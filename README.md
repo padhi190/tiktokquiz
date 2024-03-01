@@ -1,6 +1,6 @@
 # TikTokQuiz
 
-<img src="./tiktokquiz.png" width=300 />
+<img src="./tiktokquiz.png" width=500 />
 
 ## Overview
 TikTokQuiz is a React Native application that mimics TikTok. It presents users with multiple-choice questions to enhance their knowledge on various subjects while engaging with the app.
