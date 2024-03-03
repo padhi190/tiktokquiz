@@ -24,7 +24,7 @@ TikTokQuiz is a React Native application that mimics TikTok. It presents users w
 
 <img src="./tiktokquizdemo.gif" width=300 />
 
-## Technologies Used
+## Tech Stack
 -  React Native
 -  Expo
 -  TypeScript
